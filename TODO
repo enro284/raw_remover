@@ -1,0 +1,7 @@
+todo list:
+
+  basic functionality test
+
+  add automatic extension recognition 
+
+  implement cli program options: taking inspiration from coreutils' rm.
