@@ -1,6 +1,8 @@
 #include <filesystem>
 #include <iostream>
 
+#include "file_extension.hpp"
+
 namespace fs = std::filesystem;
 
 int main(int argc, char* argv[]) {
@@ -12,10 +14,23 @@ int main(int argc, char* argv[]) {
 
   std::string comp_ext;
   std::string raw_ext;
-  std::cout << "insert compressed image extension (including \".\"): ";
-  std::cin >> comp_ext;
-  std::cout << "insert raw image extension (including \".\"): ";
-  std::cin >> raw_ext;
+
+  fs::path path{"."};
+
+  enum Extension_mode { prompt_user, auto_from_list };
+  Extension_mode ext_mode{auto_from_list};
+
+  switch (ext_mode) {
+    case prompt_user:
+      std::cout << "insert compressed image extension (including \".\"): ";
+      std::cin >> comp_ext;
+      std::cout << "insert raw image extension (including \".\"): ";
+      std::cin >> raw_ext;
+      break;
+    case auto_from_list:
+      set_ext_from_list(comp_ext, raw_ext, path);
+      break;
+  }
 
   for (auto& dir_entry : fs::directory_iterator(".")) {
     if (dir_entry.is_regular_file()) {
