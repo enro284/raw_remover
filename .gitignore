@@ -1,3 +1,15 @@
+# WIP directory
+WIP
+
+# build dir
+build
+
+# compiled test dir
+test
+
+# vscode settings
+.vscode
+
 # Prerequisites
 *.d
 
